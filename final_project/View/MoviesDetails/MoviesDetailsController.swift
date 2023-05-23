@@ -98,8 +98,6 @@ class MovieDetailsController: UIViewController, Coordinating {
     func bindSetup() {
         viewModel = MovieDetailsViewModel(model: MovieDetailsModel())
         viewModel?.updateMovieDetails = updateScreen
-        viewModel?.showLoading = showLoading
-        viewModel?.hideLoading = hideLoading
         viewModel?.fetchMovie(movieId: movieId)
     }
     
@@ -122,7 +120,6 @@ class MovieDetailsController: UIViewController, Coordinating {
     
     func hideLoading() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//            self.spinner.stopAnimating()
             self.spinner.removeFromSuperview()
         }
     }
