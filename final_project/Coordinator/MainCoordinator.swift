@@ -24,7 +24,6 @@ class MainCoordinator: Coordinator {
             vc.coordinator = self
             navigationController?.pushViewController(vc, animated: true)
             
-            
         case .moviesList:
             let vc = MoviesListController()
             vc.coordinator = self

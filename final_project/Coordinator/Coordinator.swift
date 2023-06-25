@@ -12,14 +12,14 @@ enum Routes {
     case moviesDetails
 }
 
-protocol Coordinator {
-    var navigationController:UINavigationController? { get set }
+protocol Coordinator { // only COORDINATORS
+    var navigationController: UINavigationController? { get set }
     //    var childCoordinators: [Coordinator] { get set }
     
     func start()
     func navigate(to route: Routes, data: Any?)
 }
 
-protocol Coordinating {
+protocol Coordinating { // View Controllers para usar o coordinator
     var coordinator: Coordinator? {get set}
 }

@@ -19,7 +19,12 @@ class MoviesModel: MoviesModelType {
     
     func setMovies(response: Data?) {
         guard let response = response else { return }
+        
         let responseData = try? JSONDecoder().decode(MoviesTopRated.self, from: response)
-        movies = responseData!.results
+        
+        var movies = responseData?.results
+        movies?.sort(by: { $0.popularity > $1.popularity })
+        
+        self.movies = movies!
     }
 }

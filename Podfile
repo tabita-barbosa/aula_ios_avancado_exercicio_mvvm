@@ -6,7 +6,7 @@ target 'final_project' do
   use_frameworks!
   
   pod 'Alamofire'
-
+  pod 'SwiftyGif'
 
   # Pods for final_project
 

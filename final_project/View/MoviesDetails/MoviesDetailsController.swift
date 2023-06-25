@@ -10,6 +10,7 @@ import UIKit
 
 class MovieDetailsController: UIViewController, Coordinating {
     var coordinator: Coordinator?
+    
     var viewModel: MovieDetailsViewModel?
     var movieId: String
     
@@ -79,6 +80,9 @@ class MovieDetailsController: UIViewController, Coordinating {
         
         setupConstraints()
         bindSetup()
+        
+        // HIGHLIGHT -> COnstruir a tela
+        viewModel?.fetchMovie(movieId: movieId)
     }
     
     func setupConstraints() {
@@ -98,7 +102,9 @@ class MovieDetailsController: UIViewController, Coordinating {
     func bindSetup() {
         viewModel = MovieDetailsViewModel(model: MovieDetailsModel())
         viewModel?.updateMovieDetails = updateScreen
-        viewModel?.fetchMovie(movieId: movieId)
+        
+        viewModel?.showLoading = self.showLoading
+        viewModel?.hideLoading = self.hideLoading
     }
     
     func updateScreen() {
@@ -119,7 +125,7 @@ class MovieDetailsController: UIViewController, Coordinating {
     }
     
     func hideLoading() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.async {
             self.spinner.removeFromSuperview()
         }
     }

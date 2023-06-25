@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "907E53BD-80DB-4948-9E79-A9EC9E44EAA6"
+   uuid = "810B6D1D-CE71-4CDF-A626-D473519907EB"
    type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "407ABC35-75F6-4B0C-A324-66DB7702EDCD"
-            shouldBeEnabled = "Yes"
+            uuid = "8F86EDDF-A7C6-415E-976D-5AB4C4699035"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "final_project/Services/Movies/MoviesService.swift"
+            filePath = "final_project/ViewModel/Movies/MoviesViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
             endingLineNumber = "22"
-            landmarkName = "getMovies(completion:)"
+            landmarkName = "getMovies()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8F86EDDF-A7C6-415E-976D-5AB4C4699035 - ea98300eed63f16e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "final_project.MoviesViewModel.getMovies() -&gt; ()"
+                  moduleName = "final_project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jackson/Desktop/aula_ios_avancado_exercicio/final_project/ViewModel/Movies/MoviesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  uuid = "8F86EDDF-A7C6-415E-976D-5AB4C4699035 - b18bcc185a761749"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in final_project.MoviesViewModel.getMovies() -&gt; ()"
+                  moduleName = "final_project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jackson/Desktop/aula_ios_avancado_exercicio/final_project/ViewModel/Movies/MoviesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "129">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "355B3936-7449-4858-8EDB-FA537EE5ED32"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "final_project/View/MoviesList/MoviesListController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

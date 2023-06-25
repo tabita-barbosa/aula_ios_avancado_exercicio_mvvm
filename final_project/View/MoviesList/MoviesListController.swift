@@ -10,6 +10,7 @@ import UIKit
 // MARK: - Main Class
 
 class MoviesListController: UIViewController, Coordinating, UITableViewDataSource, UITableViewDelegate {
+    
     var coordinator: Coordinator?
     
     private var tableView: UITableView = {
@@ -69,7 +70,7 @@ class MoviesListController: UIViewController, Coordinating, UITableViewDataSourc
     // MARK: - Public Functions
     
     // BIND VIEW - REACTIVE RELOAD FROM VIEW MODEL
-    func reloadTable() {
+    func reloadTable() -> Void {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -79,9 +80,14 @@ class MoviesListController: UIViewController, Coordinating, UITableViewDataSourc
     // MARK: - Data source methods
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
         
-        cell.textLabel?.text = self.data[indexPath.row].title
+        let tmdbImagePath = "https://image.tmdb.org/t/p/original"
+        let currentMovie = data[indexPath.row]
+        
+        let cell = MoviesItemViewCell(reuseIdentifier: "moviesCell",
+                                      imageURL: tmdbImagePath + currentMovie.posterPath,
+                                      title: currentMovie.originalTitle)
+        
         
         return cell
     }
@@ -92,5 +98,10 @@ class MoviesListController: UIViewController, Coordinating, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         didTapCell(position: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
     }
 }
