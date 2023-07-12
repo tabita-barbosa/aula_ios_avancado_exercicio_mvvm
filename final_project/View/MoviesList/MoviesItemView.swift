@@ -17,14 +17,15 @@ class MoviesItemViewCell: UITableViewCell {
     lazy var containerStack: UIStackView = {
         let view = UIStackView()
         view.alignment = .fill
-        view.distribution = .fill
+        view.distribution = .fillEqually
+        view.spacing = 5
         view.axis = .horizontal
         return view
     }()
     
     lazy var leadingStack: UIStackView = {
         let view = UIStackView()
-        view.alignment = .center
+        view.alignment = .leading
         view.distribution = .fill
         view.axis = .vertical
         return view
@@ -33,7 +34,7 @@ class MoviesItemViewCell: UITableViewCell {
     lazy var trailingStack: UIStackView = {
         let view = UIStackView()
         view.alignment = .leading
-        view.distribution = .equalCentering
+        view.distribution = .fillProportionally
         view.axis = .vertical
         return view
     }()
@@ -42,7 +43,7 @@ class MoviesItemViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
@@ -59,7 +60,7 @@ class MoviesItemViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
@@ -67,7 +68,7 @@ class MoviesItemViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.text = "mais detalhes"
         return label
     }()
