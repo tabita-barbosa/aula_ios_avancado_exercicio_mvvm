@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Main Class
 
-class MoviesListController: UIViewController, Coordinating, UITableViewDataSource, UITableViewDelegate {
+class MoviesListController: UIViewController, Coordinating {
     
     var coordinator: Coordinator?
     
@@ -52,12 +52,7 @@ class MoviesListController: UIViewController, Coordinating, UITableViewDataSourc
         viewModel.reloadTable = self.reloadTable
     }
     
-    private func setupContraints() {
-        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20).isActive = true
-    }
+    
     
     private func didTapCell(position: IndexPath) {
         let id = String(data[position.row].id)
@@ -76,9 +71,18 @@ class MoviesListController: UIViewController, Coordinating, UITableViewDataSourc
         }
         
     }
-    
-    // MARK: - Data source methods
-    
+}
+
+extension MoviesListController {
+    private func setupContraints() {
+        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20).isActive = true
+    }
+}
+
+extension MoviesListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tmdbImagePath = "https://image.tmdb.org/t/p/original"
@@ -86,7 +90,8 @@ class MoviesListController: UIViewController, Coordinating, UITableViewDataSourc
         
         let cell = MoviesItemViewCell(reuseIdentifier: "moviesCell",
                                       imageURL: tmdbImagePath + currentMovie.posterPath,
-                                      title: currentMovie.originalTitle)
+                                      title: currentMovie.originalTitle,
+                                      rate: currentMovie.voteAverage)
         
         
         return cell
@@ -104,4 +109,5 @@ class MoviesListController: UIViewController, Coordinating, UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 250
     }
+    
 }

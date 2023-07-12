@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  Movies.swift
 //  final_project
 //
 //  Created by Jackson on 11/08/22.
