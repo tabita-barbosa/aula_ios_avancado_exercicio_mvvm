@@ -9,20 +9,20 @@ import Foundation
 
 class MovieDetailsViewModel {
     var movie: MovieDetails?
-    var model: MovieDetailsModel
+    var service: MoviesServiceType
     
     var showLoading: (() -> Void)?
     var hideLoading: (() -> Void)?
     
     var updateMovieDetails: (() -> Void)?
     
-    init(model: MovieDetailsModel) {
-        self.model = model
+    init(service: MoviesServiceType) {
+        self.service = service
     }
     
     func fetchMovie(movieId: String) {
         showLoading?() //startLoading
-        model.getDetails(movieId: movieId, completion: { [weak self] data, error in
+        service.getDetails(movieId: movieId, completion: { [weak self] data, error in
             let responseData = try? JSONDecoder().decode(MovieDetails.self, from: data!)
             self?.movie = responseData
             self?.updateMovieDetails?()

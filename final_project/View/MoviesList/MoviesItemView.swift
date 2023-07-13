@@ -44,7 +44,7 @@ class MoviesItemViewCell: UITableViewCell {
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .left
-        label.numberOfLines = 0
+        label.numberOfLines = .zero
         return label
     }()
     
@@ -69,7 +69,8 @@ class MoviesItemViewCell: UITableViewCell {
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
-        label.text = "mais detalhes"
+        label.numberOfLines = .zero
+        label.text = "clique para mais detalhes"
         return label
     }()
     
@@ -78,7 +79,7 @@ class MoviesItemViewCell: UITableViewCell {
     }
     
     init(style: UITableViewCell.CellStyle = .default, reuseIdentifier: String?, imageURL: String, title: String, rate: CGFloat) {
-        self.rate = rate
+        self.rate = rate 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.average.text = "Média: \(rate)"
@@ -112,11 +113,9 @@ extension MoviesItemViewCell {
     }
     
     private func setupBounds() {
-        self.backgroundColor = UIColor(red: 250, green: 237, blue: 205, alpha: 0.5)
-        self.layer.cornerRadius = 5
-        self.layer.borderWidth = 0.5
+        self.layer.cornerRadius = 10
+        self.layer.borderWidth = 1.5
         self.layer.borderColor = UIColor.black.cgColor
-//        self.layer.frame = layer.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
     }
     
     private func setupConstraints() {

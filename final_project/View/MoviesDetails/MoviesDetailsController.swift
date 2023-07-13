@@ -13,50 +13,7 @@ class MovieDetailsController: UIViewController, Coordinating {
     
     var viewModel: MovieDetailsViewModel?
     var movieId: String
-    
-    lazy var mainTitle: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.text = movie?.title
-        
-        return view
-    }()
-    
-    lazy var voteAverage: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.text = String(movie?.voteAverage ?? 0.0)
-        
-        return view
-    }()
-    
-    
-    lazy var voteCount: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.text = String(movie?.voteCount ?? 0)
-        
-        return view
-    }()
-    
-    
-    lazy var spinner: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        
-        view.style = .large
-        
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.startAnimating()
-        
-        return view
-        
-    }()
-    
     var movie: MovieDetails? {
         return viewModel?.movie
     }
@@ -73,60 +30,37 @@ class MovieDetailsController: UIViewController, Coordinating {
     
     override func viewDidLoad() {
         self.view.backgroundColor = .white
+        navigationItem.title = "detalhes do filme"
+        navigationItem.backButtonTitle = "voltar"
         
-        view.addSubview(mainTitle)
-        view.addSubview(voteAverage)
-        view.addSubview(voteCount)
-        
-        setupConstraints()
         bindSetup()
         
-        // HIGHLIGHT -> COnstruir a tela
         viewModel?.fetchMovie(movieId: movieId)
     }
     
-    func setupConstraints() {
-        mainTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        mainTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
-        
-        voteAverage.topAnchor.constraint(equalTo: mainTitle.topAnchor, constant: 40).isActive = true
-        voteAverage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        voteAverage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
-        
-        voteCount.topAnchor.constraint(equalTo: voteAverage.topAnchor, constant: 40).isActive = true
-        voteCount.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        voteCount.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
-    }
-    
     func bindSetup() {
-        viewModel = MovieDetailsViewModel(model: MovieDetailsModel())
+        viewModel = MovieDetailsViewModel(service: MoviesService())
         viewModel?.updateMovieDetails = updateScreen
         
-        viewModel?.showLoading = self.showLoading
-        viewModel?.hideLoading = self.hideLoading
+        viewModel?.showLoading = self.detailsView.showLoading
+        viewModel?.hideLoading = self.detailsView.hideLoading
+        
+        self.view = detailsView
     }
     
     func updateScreen() {
         DispatchQueue.main.async { [weak self] in
-            self?.mainTitle.text = "Título: \(self?.viewModel?.movie?.title ?? "")"
-            self?.voteAverage.text = "Pontuação Média: \(String(self?.viewModel?.movie?.voteAverage ?? 0.0))"
-            self?.voteCount.text = "Total de votos: \(String(self?.viewModel?.movie?.voteCount ?? 0))"
+            guard let genre = self?.viewModel?.movie?.genres?[1].name else { return }
+            self?.detailsView.updateView(title: "Título: \(self?.viewModel?.movie?.title ?? "")",
+                                         genre: "Genero: \(genre)",
+                                         rate: "Nota: \(String(self?.viewModel?.movie?.voteAverage ?? 0.0))",
+                                         resume: "Resumo: \(String(self?.viewModel?.movie?.overview ?? ""))")
         }
     }
     
-    func showLoading() {
-        view.addSubview(spinner)
-        
-        spinner.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    }
-    
-    func hideLoading() {
-        DispatchQueue.main.async {
-            self.spinner.removeFromSuperview()
-        }
-    }
+    lazy var detailsView: MoviesDetailsView = {
+        let view = MoviesDetailsView()
+        view.backgroundColor = .white
+        return view
+    }()
 }

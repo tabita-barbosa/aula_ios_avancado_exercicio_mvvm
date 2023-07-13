@@ -30,6 +30,7 @@ class MoviesListController: UIViewController, Coordinating {
     
     override func viewDidLoad() {
         self.view.backgroundColor = .white
+        navigationItem.title = "lista de filmes"
         
         super.viewDidLoad()
         
@@ -40,8 +41,6 @@ class MoviesListController: UIViewController, Coordinating {
         setupContraints()
         
         bindSetup()
-        
-        // BIND ASK DATA
         viewModel.getMovies()
     }
     
@@ -52,24 +51,18 @@ class MoviesListController: UIViewController, Coordinating {
         viewModel.reloadTable = self.reloadTable
     }
     
-    
-    
     private func didTapCell(position: IndexPath) {
-        let id = String(data[position.row].id)
+        let id = String(data[position.section].id)
         
-        // WITHOUT COORDINATOR
-        // self.present(MovieDetailsController(movieId: id), animated: true)
         coordinator?.navigate(to: .moviesDetails, data: id)
     }
     
     // MARK: - Public Functions
     
-    // BIND VIEW - REACTIVE RELOAD FROM VIEW MODEL
     func reloadTable() -> Void {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
     }
 }
 
@@ -86,7 +79,7 @@ extension MoviesListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tmdbImagePath = "https://image.tmdb.org/t/p/original"
-        let currentMovie = data[indexPath.row]
+        let currentMovie = data[indexPath.section]
         
         let cell = MoviesItemViewCell(reuseIdentifier: "moviesCell",
                                       imageURL: tmdbImagePath + currentMovie.posterPath,
@@ -97,8 +90,12 @@ extension MoviesListController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -110,4 +107,13 @@ extension MoviesListController: UITableViewDataSource, UITableViewDelegate {
         return 250
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let v = UIView()
+        v.backgroundColor = .white
+        return v
+    }
 }
