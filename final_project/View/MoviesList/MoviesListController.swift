@@ -31,6 +31,7 @@ class MoviesListController: UIViewController, Coordinating {
     override func viewDidLoad() {
         self.view.backgroundColor = .white
         navigationItem.title = "lista de filmes"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         super.viewDidLoad()
         

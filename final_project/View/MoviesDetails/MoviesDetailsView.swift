@@ -29,6 +29,26 @@ final class MoviesDetailsView: UIView {
         return label
     }()
     
+    lazy var releaseDate: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textAlignment = .left
+        label.numberOfLines = .zero
+        return label
+    }()
+    
+    lazy var duration: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textAlignment = .left
+        label.numberOfLines = .zero
+        return label
+    }()
+    
     lazy var movieGenre: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -79,8 +99,10 @@ final class MoviesDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateView(title: String, genre: String, rate: String, resume: String ) {
+    func updateView(title: String, releaseDate: String, duration: String, genre: String, rate: String, resume: String ) {
         self.mainTitle.text = title
+        self.releaseDate.text = releaseDate
+        self.duration.text = duration
         self.movieGenre.text = genre
         self.voteRate.text = rate
         self.movieResume.text = resume
@@ -112,6 +134,8 @@ extension MoviesDetailsView {
     func setupHierarchy() {
         addSubview(self.stackContainer)
         stackContainer.addArrangedSubview(self.mainTitle)
+        stackContainer.addArrangedSubview(self.releaseDate)
+        stackContainer.addArrangedSubview(self.duration)
         stackContainer.addArrangedSubview(self.movieGenre)
         stackContainer.addArrangedSubview(self.voteRate)
         stackContainer.addArrangedSubview(self.movieResume)

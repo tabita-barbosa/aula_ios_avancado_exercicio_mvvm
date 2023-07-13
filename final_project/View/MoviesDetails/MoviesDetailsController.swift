@@ -31,7 +31,6 @@ class MovieDetailsController: UIViewController, Coordinating {
     override func viewDidLoad() {
         self.view.backgroundColor = .white
         navigationItem.title = "detalhes do filme"
-        navigationItem.backButtonTitle = "voltar"
         
         bindSetup()
         
@@ -52,6 +51,8 @@ class MovieDetailsController: UIViewController, Coordinating {
         DispatchQueue.main.async { [weak self] in
             guard let genre = self?.viewModel?.movie?.genres?[1].name else { return }
             self?.detailsView.updateView(title: "Título: \(self?.viewModel?.movie?.title ?? "")",
+                                         releaseDate: "Data de lançamento: \(String(self?.viewModel?.movie?.releaseDate ?? ""))",
+                                         duration: "Duração: \(String(self?.viewModel?.movie?.runtime ?? 0)) minutos",
                                          genre: "Genero: \(genre)",
                                          rate: "Nota: \(String(self?.viewModel?.movie?.voteAverage ?? 0.0))",
                                          resume: "Resumo: \(String(self?.viewModel?.movie?.overview ?? ""))")
